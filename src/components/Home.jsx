@@ -18,6 +18,9 @@ const Home = () => {
           const paste = allPastes.find((p) => p._id === pasteId)
           setTitle(paste.title);
           setValue(paste.content);
+        }else{
+          setTitle('');
+          setValue('');
         }
         
       }, [pasteId])
@@ -52,7 +55,9 @@ const Home = () => {
         dispatch(updateToPastes(paste));
       }else{
         //create
-        dispatch(addToPastes(paste));
+        if(paste.title !== '' && paste.value !== ''){
+          dispatch(addToPastes(paste));
+        }
       }
 
       //after creation or updation
